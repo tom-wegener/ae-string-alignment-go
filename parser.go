@@ -2,8 +2,8 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"log"
+	"math/rand"
 	"os"
 	"strings"
 )
@@ -34,7 +34,8 @@ func parseFiles(path string) (data []record) {
 
 			data = append(data, rec)
 		} else {
-			rec.seq = rec.seq + sLine
+			data[len(data)-1].seq = data[len(data)-1].seq + sLine
+			//rec.seq = rec.seq + sLine
 		}
 	}
 
@@ -43,7 +44,41 @@ func parseFiles(path string) (data []record) {
 		log.Fatal(err)
 	}
 
-	fmt.Println("no error occured in Parsing")
+	//fmt.Println("no error occured in Parsing")
 
+	//fmt.Println(data[1].seq)
 	return data
+}
+
+func genEntr() (data []record) {
+	for i := 0; i < 50; i++ {
+		var rec record
+		rec.key = ">" + randomString(9)
+		rec.name = randomString(10)
+		if i < 10 {
+			rec.seq = randomString(400)
+		} else if i < 20 {
+			rec.seq = randomString(400)
+		} else if i < 30 {
+			rec.seq = randomString(400)
+		} else if i < 40 {
+			rec.seq = randomString(400)
+		}
+		data = append(data, rec)
+	}
+	//fmt.Print(data)
+	return data
+}
+
+func randomInt(min, max int) int {
+	return min + rand.Intn(max-min)
+}
+
+// Generate a random string of A-Z chars with len = l
+func randomString(len int) string {
+	bytes := make([]byte, len)
+	for i := 0; i < len; i++ {
+		bytes[i] = byte(randomInt(65, 90))
+	}
+	return string(bytes)
 }
