@@ -8,26 +8,10 @@ import (
 	"strings"
 )
 
-var rec record
-
-func buildFasta(line string, data *[]record) {
-	if line[:1] == ">" {
-		if len(rec.key) > 0 {
-			*data = append(*data, rec)
-		}
-		splittedLine := strings.Split(line, " ")
-		rec.key = splittedLine[0]
-		rec.name = splittedLine[1]
-		rec.seq = ""
-	} else {
-		rec.seq = rec.seq + line
-	}
-
-	//return data
-}
-
 func parseFiles(path string) (data []record) {
 	//data := make([]record, 0)
+	var rec record
+
 	faFile, err := os.Open(path) //open file
 	if err != nil {              //when errors occure....
 		log.Fatal(err)
@@ -42,14 +26,24 @@ func parseFiles(path string) (data []record) {
 	for scanner.Scan() {
 		bLine := scanner.Text()
 		sLine := string(bLine)
-		buildFasta(sLine, &data)
-		fmt.Print(data)
+		if sLine[:1] == ">" {
+			splittedLine := strings.Split(sLine, "|")
+			rec.key = splittedLine[0]
+			rec.name = splittedLine[1]
+			rec.seq = ""
+
+			data = append(data, rec)
+		} else {
+			rec.seq = rec.seq + sLine
+		}
 	}
 
 	err = scanner.Err()
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Println("no error occured in Parsing")
 
 	return data
 }
