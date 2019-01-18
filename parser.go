@@ -51,18 +51,18 @@ func parseFiles(path string) (data []record) {
 }
 
 func genEntr() (data []record) {
-	for i := 0; i < 50; i++ {
+	for i := 0; i < 51; i++ {
 		var rec record
 		rec.key = ">" + randomString(9)
 		rec.name = randomString(10)
 		if i < 10 {
-			rec.seq = randomString(400)
+			rec.seq = randomString(1000)
 		} else if i < 20 {
-			rec.seq = randomString(400)
+			rec.seq = randomString(2000)
 		} else if i < 30 {
-			rec.seq = randomString(400)
+			rec.seq = randomString(3000)
 		} else if i < 40 {
-			rec.seq = randomString(400)
+			rec.seq = randomString(4000)
 		}
 		data = append(data, rec)
 	}

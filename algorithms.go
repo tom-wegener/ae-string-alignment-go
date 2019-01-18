@@ -8,8 +8,9 @@ import (
 func compareFiles(dataA []record, dataB []record) (runTimes [][]int) {
 	fmt.Println(dataA[1].seq)
 	fmt.Println("-------------------------------------------------")
-	runNums := []int{10, 15, 20, 25, 30}
+	runNums := []int{10, 15, 20, 25, 30, 35, 40}
 	runTimes = make([][]int, 0)
+	seqLen := 0
 	for i, runNum := range runNums {
 		startTime := time.Now()
 		for x := 0; x < runNum; x++ {
@@ -18,11 +19,12 @@ func compareFiles(dataA []record, dataB []record) (runTimes [][]int) {
 
 				seqB := dataB[y].seq
 				needlemanWunsch(seqA, seqB)
+				seqLen = seqLen + len(seqA) + len(seqB)
 			}
 		}
 		endTime := time.Now()
 		runTime := endTime.Sub(startTime)
-		runTimesL := []int{runNum, int(runTime)}
+		runTimesL := []int{seqLen, int(runTime)}
 		runTimes = append(runTimes, runTimesL)
 		runTimes[i][1] = int(runTime.Seconds())
 	}

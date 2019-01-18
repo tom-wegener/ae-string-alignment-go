@@ -1,8 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/pkg/profile"
+)
 
 func main() {
+	defer profile.Start().Stop()
 	aeae := "data/aedes_aegypti_protein.fa"
 	aeal := "data/aedes_albopictus_protein.fa"
 	dataAEAE := parseFiles(aeae)
