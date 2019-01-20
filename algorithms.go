@@ -1,13 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"time"
 )
 
 func compareFiles(dataA []record, dataB []record) (runTimes [][]int) {
-	fmt.Println(dataA[1].seq)
-	fmt.Println("-------------------------------------------------")
 	runNums := []int{10, 15, 20, 25, 30, 35, 40}
 	runTimes = make([][]int, 0)
 	seqLen := 0
@@ -66,13 +63,13 @@ func needlemanWunsch(seqA, seqB string) {
 			resMatch := numMat[i-1][j-1] + score
 			resDel := numMat[i-1][j] + gap
 			resIns := numMat[i][j-1] + gap
-			numMat[i][j] = min(resMatch, resDel, resIns)
+			numMat[i][j] = minA(resMatch, resDel, resIns)
 		}
 	}
 
 }
 
-func min(is ...int) int {
+func minA(is ...int) int {
 	min := is[0]
 	for _, i := range is[1:] {
 		if i < min {
@@ -80,4 +77,14 @@ func min(is ...int) int {
 		}
 	}
 	return min
+}
+
+func minB(a, b, c int) int {
+	if a < b && b < c {
+		return a
+	} else if a > b && b > c {
+		return c
+	} else {
+		return b
+	}
 }
