@@ -7,8 +7,9 @@ import (
 func compareFiles(dataA []record, dataB []record) (runTimes [][]int) {
 	runNums := []int{10, 15, 20, 25, 30, 35, 40}
 	runTimes = make([][]int, 0)
-	seqLen := 0
-	for i, runNum := range runNums {
+
+	for _, runNum := range runNums {
+		seqLen := 0
 		startTime := time.Now()
 		for x := 0; x < runNum; x++ {
 			for y := 0; y < runNum; y++ {
@@ -21,9 +22,9 @@ func compareFiles(dataA []record, dataB []record) (runTimes [][]int) {
 		}
 		endTime := time.Now()
 		runTime := endTime.Sub(startTime)
-		runTimesL := []int{seqLen, int(runTime)}
+		runTimesL := []int{seqLen, int(runTime.Seconds())}
 		runTimes = append(runTimes, runTimesL)
-		runTimes[i][1] = int(runTime.Seconds())
+		//runTimes[i][1] = int(runTime.Seconds())
 	}
 	return runTimes
 }
