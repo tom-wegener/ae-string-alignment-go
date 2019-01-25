@@ -10,21 +10,26 @@ func compareFiles(dataA []record, dataB []record) (runTimes [][]int) {
 
 	for _, runNum := range runNums {
 		seqLen := 0
-		startTime := time.Now()
 		for x := 0; x < runNum; x++ {
 			for y := 0; y < runNum; y++ {
-				seqA := dataA[x].seq
+				startTime := time.Now()
 
+				seqA := dataA[x].seq
 				seqB := dataB[y].seq
 				needlemanWunsch(seqA, seqB)
-				seqLen = seqLen + len(seqA) + len(seqB)
+				seqLen = len(seqA) * len(seqB)
+
+				endTime := time.Now()
+				runTime := endTime.Sub(startTime)
+				runTimesL := []int{seqLen, int(runTime.Seconds())}
+				runTimes = append(runTimes, runTimesL)
 			}
 		}
-		endTime := time.Now()
+		/*endTime := time.Now()
 		runTime := endTime.Sub(startTime)
 		runTimesL := []int{seqLen, int(runTime.Seconds())}
 		runTimes = append(runTimes, runTimesL)
-		//runTimes[i][1] = int(runTime.Seconds())
+		//runTimes[i][1] = int(runTime.Seconds())*/
 	}
 	return runTimes
 }
