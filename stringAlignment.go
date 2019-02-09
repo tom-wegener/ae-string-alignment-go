@@ -26,3 +26,9 @@ func main() {
 
 	plotIt(runTimesNoS, runTimesRaS, runTimesNoL, runTimesRaL)
 }
+
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
