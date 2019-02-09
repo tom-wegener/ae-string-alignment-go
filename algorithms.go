@@ -19,8 +19,9 @@ func compareFiles(dataA []record, dataB []record, fastMin bool) (runTimes runTim
 				needlemanWunsch(seqA, seqB, fastMin)
 
 				endTime := time.Now()
+
 				timeRow.strLen = len(seqA) * len(seqB)
-				timeRow.runTime = float64(endTime.Sub(startTime))
+				timeRow.runTime = int(endTime.Sub(startTime))
 				runTimes = append(runTimes, timeRow)
 			}
 		}

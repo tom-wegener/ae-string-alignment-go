@@ -12,7 +12,7 @@ func (c ByArea) Less(i, j int) bool { return c[i].Area > c[j].Area }*/
 
 type times struct {
 	strLen  int
-	runTime float64
+	runTime int
 }
 
 type runTimesArr []times
