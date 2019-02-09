@@ -18,8 +18,11 @@ func main() {
 	dataRA = genEntr()
 	dataRB = genEntr()
 
-	runTimesA := compareFiles(dataAEAE, dataAEAL)
-	runTimesB := compareFiles(dataRA, dataRB)
+	runTimesNoS := compareFiles(dataAEAE, dataAEAL, false)
+	runTimesRaS := compareFiles(dataRA, dataRB, false)
 
-	plotIt(runTimesA, runTimesB)
+	runTimesNoL := compareFiles(dataAEAE, dataAEAL, true)
+	runTimesRaL := compareFiles(dataRA, dataRB, true)
+
+	plotIt(runTimesNoS, runTimesRaS, runTimesNoL, runTimesRaL)
 }

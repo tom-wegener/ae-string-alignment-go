@@ -4,25 +4,24 @@ import (
 	"time"
 )
 
-func compareFiles(dataA []record, dataB []record) (runTimes [][]int) {
+func compareFiles(dataA []record, dataB []record, fastMin bool) (runTimes runTimesArr) {
 	runNums := []int{10, 15, 20, 25, 30, 35, 40}
-	runTimes = make([][]int, 0)
+	runTimes = make(runTimesArr, 0)
 
 	for _, runNum := range runNums {
-		seqLen := 0
 		for x := 0; x < runNum; x++ {
 			for y := 0; y < runNum; y++ {
+				var timeRow times
 				startTime := time.Now()
 
 				seqA := dataA[x].seq
 				seqB := dataB[y].seq
-				needlemanWunsch(seqA, seqB)
-				seqLen = len(seqA) * len(seqB)
+				needlemanWunsch(seqA, seqB, fastMin)
 
 				endTime := time.Now()
-				runTime := endTime.Sub(startTime)
-				runTimesL := []int{seqLen, int(runTime.Seconds())}
-				runTimes = append(runTimes, runTimesL)
+				timeRow.strLen = len(seqA) * len(seqB)
+				timeRow.runTime = float64(endTime.Sub(startTime))
+				runTimes = append(runTimes, timeRow)
 			}
 		}
 		/*endTime := time.Now()
@@ -31,10 +30,11 @@ func compareFiles(dataA []record, dataB []record) (runTimes [][]int) {
 		runTimes = append(runTimes, runTimesL)
 		//runTimes[i][1] = int(runTime.Seconds())*/
 	}
+
 	return runTimes
 }
 
-func needlemanWunsch(seqA, seqB string) {
+func needlemanWunsch(seqA, seqB string, fastMin bool) {
 
 	a := len(seqA) + 1
 	b := len(seqB) + 1
@@ -69,7 +69,12 @@ func needlemanWunsch(seqA, seqB string) {
 			resMatch := numMat[i-1][j-1] + score
 			resDel := numMat[i-1][j] + gap
 			resIns := numMat[i][j-1] + gap
-			numMat[i][j] = minA(resMatch, resDel, resIns)
+			if fastMin == true {
+				numMat[i][j] = minB(resMatch, resDel, resIns)
+			} else {
+				numMat[i][j] = minA(resMatch, resDel, resIns)
+			}
+
 		}
 	}
 
