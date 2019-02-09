@@ -13,9 +13,7 @@ func parseFiles(path string) (data []record) {
 	var rec record
 
 	faFile, err := os.Open(path) //open file
-	if err != nil {              //when errors occure....
-		log.Fatal(err)
-	}
+	check(err)
 	defer func() {
 		if err = faFile.Close(); err != nil {
 			log.Fatal(err)
@@ -55,15 +53,9 @@ func genEntr() (data []record) {
 		var rec record
 		rec.key = ">" + randomString(9)
 		rec.name = randomString(10)
-		if i < 10 {
-			rec.seq = randomString(1000)
-		} else if i < 20 {
-			rec.seq = randomString(2000)
-		} else if i < 30 {
-			rec.seq = randomString(3000)
-		} else if i < 40 {
-			rec.seq = randomString(4000)
-		}
+		strLen := i * 100
+		rec.seq = randomString(strLen)
+
 		data = append(data, rec)
 	}
 	//fmt.Print(data)
