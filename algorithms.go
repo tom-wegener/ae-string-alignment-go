@@ -21,7 +21,7 @@ func compareFiles(dataA []record, dataB []record) (runTimes [][]int) {
 
 				endTime := time.Now()
 				runTime := endTime.Sub(startTime)
-				runTimesL := []int{seqLen, int(runTime.Seconds())}
+				runTimesL := []int{seqLen, int(runTime)}
 				runTimes = append(runTimes, runTimesL)
 			}
 		}
