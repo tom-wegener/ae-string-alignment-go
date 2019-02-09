@@ -20,16 +20,11 @@ func compareFiles(dataA []record, dataB []record, fastMin bool) (runTimes runTim
 
 				endTime := time.Now()
 
-				timeRow.strLen = len(seqA) * len(seqB)
+				timeRow.strLen = (len(seqA) * len(seqB))
 				timeRow.runTime = int(endTime.Sub(startTime))
 				runTimes = append(runTimes, timeRow)
 			}
 		}
-		/*endTime := time.Now()
-		runTime := endTime.Sub(startTime)
-		runTimesL := []int{seqLen, int(runTime.Seconds())}
-		runTimes = append(runTimes, runTimesL)
-		//runTimes[i][1] = int(runTime.Seconds())*/
 	}
 
 	return runTimes
