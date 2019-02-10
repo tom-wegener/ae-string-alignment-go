@@ -1,0 +1,10 @@
+\BOOKMARK [1][-]{section.1}{Einleitung}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{generelle Aufgabenstellung}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{spezielle Problembeschreibung}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Charakteristika der Eingabedaten}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Messumgebung}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{Algorithmen und Optimierung}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{Needleman-Wunsch}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{Paraleller Needleman-Wunsch}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Laufzeitmessungen}{}% 9
+\BOOKMARK [1][-]{section.4}{Ausblick}{}% 10

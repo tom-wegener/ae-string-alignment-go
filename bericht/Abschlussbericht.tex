@@ -1,0 +1,90 @@
+
+\documentclass[a4paper]{article}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{csquotes}
+\usepackage{minted}
+
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+\title{Algorithm Engineering-Projekt}
+\subtitle{String Alignment mit Neeldeman-Wunsch}
+\date{2019-02-10}
+\author{Tom Wegener, 18INM/TZ}
+
+
+\geometry{a4paper, left=30mm, right=20mm,top=25mm,bottom=25mm}
+	\fancyhead{}
+	\fancyhead[L]{Tom Wegener, 15MI2B}
+	\fancyhead[R]{Abschlussbericht SWP}
+	\fancyfoot{}
+	\fancyfoot[R]{\thepage}
+
+\setlength{\parindent}{0em}
+
+
+\begin{document}
+
+\pagestyle{empty}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\pagestyle{fancy}
+
+\setcounter{page}{1}
+
+\section{Einleitung}
+\subsection{generelle Aufgabenstellung}
+Am Anfang des Semesters soll sich für ein Projekt entschieden werden, dieses dann in vier Schritten über den Zeitraum des Semesters ausprogrammiert werden. Zu diesen vier Schritten gehört jeweils eine Abgabe. \\
+Zuerst sollte ein Parser entwickelt werden, der die ausgewählten Daten ausliest und abspeichert. Anschließend eine erste Version des Algorithmus ausprogrammiert werden und erste Laufzeiten gemessen werden, die anschließend auch graphisch dargestellt werden. Aus den Laufzeiten sollten dann als dritte Aufgabe Optimierungsmöglichkeiten aufzeigen. Außerdem wurde die Verwendung eines Profilers empfohlen. In der vierten Aufgabe werden dann zwei Algorithmen auf unterschiedliche Art und Weise verglichen.
+
+\subsection{spezielle Problembeschreibung}
+In dieser Arbeit wird das Problem String-Alignment behandelt. Die Daten werden aus der Datenbank des "National Institute of biotechnical Information" (ncbi) in Form von Fasta-Dateien entnommen und durch einen Parser eingelesen. \\
+Anschließend wird ein Wert ausgegeben, der der Ähnlichkeit von den zwei Strings entspricht.
+Dafür gibt es verschiedene Algorithmen.\\
+Das Projekt wurde zuerst teilweise in Python umgesetzt und anschließend in Go (bzw golang) übersetzt und fertig gestellt, um die Laufzeiten niedrig zu halten.
+
+\subsection{Charakteristika der Eingabedaten}
+Die 
+
+\begin{minted}{go}
+   test
+\end{minted}
+
+\subsection{Messumgebung}
+
+\section{Algorithmen und Optimierung}
+\subsection{Needleman-Wunsch}
+\subsection{Paraleller Needleman-Wunsch}
+
+\section{Laufzeitmessungen}
+
+
+
+\section{Ausblick}
+Das Projekt verlief im Blick auf den Fortschritt relativ konstant, es konnte jedoch gegen Ende der Projektzeitraums ein deutlicher Anstieg der Produktivität und Anstrengung festgestellt werden. Das hat vermutlich damit zu tun, dass wir selbst etwas mehr den Druck, dass das Projekt bald fertig sein muss, gespürt haben, aber auch damit, dass Bachelor- sowie Master-Studenten die Arbeitspaket-Formulierung deutlich verbessert haben und eher viele, aber kleinere Pakete erstellt worden sind, wodurch eine höhere Flexibilität und Produktivität erreicht werden konnte. \\
+Außerdem erschweren Prüfungsphasen auch eine konstante Arbeit am Projekt, da sich in diesen die Aufmerksamkeit auf die Prüfungen legt und somit die Arbeit am Projekt deutlich zurückgeht.\\
+Das Projekt hat mir sehr gut gefallen, da wir keinen bereits vorhandenen Code refactorn mussten oder uns in solchen einlesen mussten, sondern frisch starten konnten. Auch das Thema war interessant und hat uns dadurch, dass es uns eine Auseinandersetzung mit neuen Gegebenheiten abverlangt hat, auch ein Erlernen neuer sowie ein Verbessern und Anwenden bereits vorhandener Fähigkeiten ermöglicht. \\
+Der Wechsel des Projektes und Kundens war eine Hürde, die wir erfolgreich gemeistert haben und mit der ich auch sehr zufrieden bin, da unser Produkt schon viel Konkurrenz hatte, bevor wir angefangen haben und ich keinen Unique Selling Point ausmachen konnte, der uns von der Konkurrenz abgegrenzt hätte. Auch der Anspruch des ersten Kundens, den Quellcode des Projektes  nicht zu veröffentlichen, wäre meiner Meinung nach für ein Projekt von Studierenden nicht angemessen gewesen.
+
+
+\end{document}
