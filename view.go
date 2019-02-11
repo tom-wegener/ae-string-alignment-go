@@ -11,7 +11,7 @@ import (
 	"gonum.org/v1/plot/vg"
 )
 
-func plotIt(runTimesComp []runTimesArr) {
+func plotIt(runTimesComp []runTimesArr, runNamesComp []string) {
 
 	fmt.Println("starting to plot")
 	p, err := plot.New()
@@ -23,10 +23,11 @@ func plotIt(runTimesComp []runTimesArr) {
 
 	//sort and print Times
 	//pts := []
-	for _, arr := range runTimesComp {
-		pts := pnpTimes(arr, "test")
+	for i, arr := range runTimesComp {
+		name := runNamesComp[i] + "out"
+		pts := pnpTimes(arr, name)
 		err = plotutil.AddScatters(p,
-			"Fasta Short", pts)
+			runNamesComp[i], pts)
 		check(err)
 	}
 

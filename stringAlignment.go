@@ -31,12 +31,17 @@ func main() {
 	dataRA := genEntr()
 	dataRB := genEntr()
 
-	var runTimesComp []runTimesArr
-	runTimesComp = make([]runTimesArr, 2)
+	//var runTimesComp []runTimesArr
+	runTimesComp := make([]runTimesArr, 2)
 	runTimesComp[0] = compareFiles(dataA, dataB, alg)
 	runTimesComp[1] = compareFiles(dataRA, dataRB, alg)
 
-	plotIt(runTimesComp)
+	//var runNamesComp []string
+	runNamesComp := make([]string, 2)
+	runNamesComp[0] = firstFile + secFile
+	runNamesComp[1] = "Random"
+
+	plotIt(runTimesComp, runNamesComp)
 }
 
 func readConf() *config.Config {

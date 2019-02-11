@@ -1,6 +1,6 @@
 files:
   first: data/aedes_aegypti_protein.fa
   second: data/aedes_albopictus_protein.fa
-  output: pointsA.png
+  output: pointsB.png
 algorithm: needleman-wunsch
 profile: true
