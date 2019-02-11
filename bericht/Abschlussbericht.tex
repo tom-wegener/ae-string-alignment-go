@@ -12,6 +12,7 @@
 \usepackage{titling}
 \usepackage{csquotes}
 \usepackage{minted}
+\usepackage{xcolor}
 
 \newcommand{\subtitle}[1]{%
   \posttitle{%
@@ -64,11 +65,9 @@ Dafür gibt es verschiedene Algorithmen.\\
 Das Projekt wurde zuerst teilweise in Python umgesetzt und anschließend in Go (bzw golang) übersetzt und fertig gestellt, um die Laufzeiten niedrig zu halten.
 
 \subsection{Charakteristika der Eingabedaten}
-Die 
+Die Fasta-Files haben den Aufbau, dass sie mehrere Blöcke an DNA-Sequenzen enthalten, jeder Block wird über ein ">" eingeleitet, dahinter steht dann eine Beschreibung, die auch eine ID enthält. In den nachfolgenden Zeilen sind dann die DNA-Strings durch Zeichenketten bestehend aus Buchstaben enthalten. Diese Zeichenketten haben eine maximale Länge von 80 zeichen pro Zeile und sind deshalb auf mehrere Zeilen verteilt.
 
-\begin{minted}{go}
-   test
-\end{minted}
+%TODO: Fasta einfügen
 
 \subsection{Messumgebung}
 
@@ -81,10 +80,7 @@ Die
 
 
 \section{Ausblick}
-Das Projekt verlief im Blick auf den Fortschritt relativ konstant, es konnte jedoch gegen Ende der Projektzeitraums ein deutlicher Anstieg der Produktivität und Anstrengung festgestellt werden. Das hat vermutlich damit zu tun, dass wir selbst etwas mehr den Druck, dass das Projekt bald fertig sein muss, gespürt haben, aber auch damit, dass Bachelor- sowie Master-Studenten die Arbeitspaket-Formulierung deutlich verbessert haben und eher viele, aber kleinere Pakete erstellt worden sind, wodurch eine höhere Flexibilität und Produktivität erreicht werden konnte. \\
-Außerdem erschweren Prüfungsphasen auch eine konstante Arbeit am Projekt, da sich in diesen die Aufmerksamkeit auf die Prüfungen legt und somit die Arbeit am Projekt deutlich zurückgeht.\\
-Das Projekt hat mir sehr gut gefallen, da wir keinen bereits vorhandenen Code refactorn mussten oder uns in solchen einlesen mussten, sondern frisch starten konnten. Auch das Thema war interessant und hat uns dadurch, dass es uns eine Auseinandersetzung mit neuen Gegebenheiten abverlangt hat, auch ein Erlernen neuer sowie ein Verbessern und Anwenden bereits vorhandener Fähigkeiten ermöglicht. \\
-Der Wechsel des Projektes und Kundens war eine Hürde, die wir erfolgreich gemeistert haben und mit der ich auch sehr zufrieden bin, da unser Produkt schon viel Konkurrenz hatte, bevor wir angefangen haben und ich keinen Unique Selling Point ausmachen konnte, der uns von der Konkurrenz abgegrenzt hätte. Auch der Anspruch des ersten Kundens, den Quellcode des Projektes  nicht zu veröffentlichen, wäre meiner Meinung nach für ein Projekt von Studierenden nicht angemessen gewesen.
+
 
 
 \end{document}
