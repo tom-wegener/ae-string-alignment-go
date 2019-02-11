@@ -11,7 +11,7 @@ import (
 	"gonum.org/v1/plot/vg"
 )
 
-func plotIt(runTimesNoS, runTimesRaS, runTimesNoL, runTimesRaL []times) {
+func plotIt(runTimesComp []runTimesArr) {
 
 	fmt.Println("starting to plot")
 	p, err := plot.New()
@@ -23,22 +23,18 @@ func plotIt(runTimesNoS, runTimesRaS, runTimesNoL, runTimesRaL []times) {
 
 	//sort and print Times
 	//pts := []
-	ptsNoS := pnpTimes(runTimesNoS, "NormalShort")
-	ptsRaS := pnpTimes(runTimesRaS, "RandomShort")
-	ptsNoL := pnpTimes(runTimesNoL, "NormalLangsam")
-	ptsRaL := pnpTimes(runTimesRaL, "RandomLangsam")
-
-	err = plotutil.AddScatters(p,
-		"Fasta Short", ptsNoS,
-		"Zufall Short", ptsRaS,
-		"Fasta Long", ptsNoL,
-		"Zufall Long", ptsRaL,
-	)
-
-	check(err)
+	for _, arr := range runTimesComp {
+		pts := pnpTimes(arr, "test")
+		err = plotutil.AddScatters(p,
+			"Fasta Short", pts)
+		check(err)
+	}
 
 	// Save the plot to a PNG file.
-	err = p.Save(10*vg.Inch, 10*vg.Inch, "points.png")
+
+	outputFile, err := cfg.String("files.output")
+	check(err)
+	err = p.Save(10*vg.Inch, 10*vg.Inch, outputFile)
 	check(err)
 }
 
@@ -46,6 +42,7 @@ func pnpTimes(runTimes []times, idStr string) plotter.XYs {
 	//sorting
 	sort.Sort(runTimesArr(runTimes))
 	sortedTimes := runTimes
+
 	//making plot
 	n := len(sortedTimes)
 	pts := make(plotter.XYs, n)

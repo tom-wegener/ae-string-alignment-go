@@ -4,25 +4,27 @@ import (
 	"time"
 )
 
-func compareFiles(dataA []record, dataB []record, fastMin bool) (runTimes runTimesArr) {
+func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimesArr) {
 	runNums := []int{10, 15, 20, 25, 30, 35, 40}
 	runTimes = make(runTimesArr, 0)
 
-	for _, runNum := range runNums {
-		for x := 0; x < runNum; x++ {
-			for y := 0; y < runNum; y++ {
-				var timeRow times
-				startTime := time.Now()
+	if alg == "needleman-wunsch" {
+		for _, runNum := range runNums {
+			for x := 0; x < runNum; x++ {
+				for y := 0; y < runNum; y++ {
+					var timeRow times
+					startTime := time.Now()
 
-				seqA := dataA[x].seq
-				seqB := dataB[y].seq
-				needlemanWunsch(seqA, seqB, fastMin)
+					seqA := dataA[x].seq
+					seqB := dataB[y].seq
+					needlemanWunsch(seqA, seqB)
 
-				endTime := time.Now()
+					endTime := time.Now()
 
-				timeRow.strLen = (len(seqA) * len(seqB))
-				timeRow.runTime = int(endTime.Sub(startTime))
-				runTimes = append(runTimes, timeRow)
+					timeRow.strLen = (len(seqA) * len(seqB))
+					timeRow.runTime = int(endTime.Sub(startTime))
+					runTimes = append(runTimes, timeRow)
+				}
 			}
 		}
 	}
@@ -30,7 +32,7 @@ func compareFiles(dataA []record, dataB []record, fastMin bool) (runTimes runTim
 	return runTimes
 }
 
-func needlemanWunsch(seqA, seqB string, fastMin bool) {
+func needlemanWunsch(seqA, seqB string) {
 
 	a := len(seqA) + 1
 	b := len(seqB) + 1
@@ -65,28 +67,14 @@ func needlemanWunsch(seqA, seqB string, fastMin bool) {
 			resMatch := numMat[i-1][j-1] + score
 			resDel := numMat[i-1][j] + gap
 			resIns := numMat[i][j-1] + gap
-			if fastMin == true {
-				numMat[i][j] = minB(resMatch, resDel, resIns)
-			} else {
-				numMat[i][j] = minA(resMatch, resDel, resIns)
-			}
+			numMat[i][j] = min(resMatch, resDel, resIns)
 
 		}
 	}
 
 }
 
-func minA(is ...int) int {
-	min := is[0]
-	for _, i := range is[1:] {
-		if i < min {
-			min = i
-		}
-	}
-	return min
-}
-
-func minB(a, b, c int) int {
+func min(a, b, c int) int {
 	if a < b && b < c {
 		return a
 	} else if a > b && b > c {

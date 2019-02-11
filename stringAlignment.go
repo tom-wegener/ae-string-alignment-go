@@ -1,30 +1,52 @@
 package main
 
 import (
+	"io/ioutil"
+
+	"github.com/olebedev/config"
 	"github.com/pkg/profile"
 )
 
+var cfg *config.Config
+
 func main() {
-	defer profile.Start().Stop()
+	cfg = readConf()
+	profileBool, err := cfg.Bool("profile")
+	check(err)
+	if profileBool == true {
+		defer profile.Start().Stop()
+	}
 
-	aeae := "data/aedes_aegypti_protein.fa"
-	aeal := "data/aedes_albopictus_protein.fa"
+	firstFile, err := cfg.String("files.first")
+	check(err)
+	secFile, err := cfg.String("files.second")
+	check(err)
 
-	var dataAEAE, dataAEAL, dataRA, dataRB []record
+	alg, err := cfg.String("algorithm")
+	check(err)
 
-	dataAEAE = parseFiles(aeae)
-	dataAEAL = parseFiles(aeal)
+	dataA := parseFiles(firstFile)
+	dataB := parseFiles(secFile)
 
-	dataRA = genEntr()
-	dataRB = genEntr()
+	dataRA := genEntr()
+	dataRB := genEntr()
 
-	runTimesNoS := compareFiles(dataAEAE, dataAEAL, false)
-	runTimesRaS := compareFiles(dataRA, dataRB, false)
+	var runTimesComp []runTimesArr
+	runTimesComp = make([]runTimesArr, 2)
+	runTimesComp[0] = compareFiles(dataA, dataB, alg)
+	runTimesComp[1] = compareFiles(dataRA, dataRB, alg)
 
-	runTimesNoL := compareFiles(dataAEAE, dataAEAL, true)
-	runTimesRaL := compareFiles(dataRA, dataRB, true)
+	plotIt(runTimesComp)
+}
 
-	plotIt(runTimesNoS, runTimesRaS, runTimesNoL, runTimesRaL)
+func readConf() *config.Config {
+	var confFile, err = ioutil.ReadFile("config.yml")
+	check(err)
+	yamlString := string(confFile)
+
+	cfg, err := config.ParseYaml(yamlString)
+	check(err)
+	return cfg
 }
 
 func check(e error) {
