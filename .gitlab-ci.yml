@@ -6,5 +6,5 @@ stages:
 test:
   stage: test
   script: 
-  - go build -o proj
-  - ./proj
+  #- go build -o proj
+  #- ./proj
