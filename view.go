@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"sort"
 
 	"gonum.org/v1/plot"
@@ -21,16 +20,20 @@ func plotIt(runTimesComp []runTimesArr, runNamesComp []string) {
 	p.X.Label.Text = "Datenlänge"
 	p.Y.Label.Text = "benötigte Zeit in Sekunden"
 
-	//sort and print Times
-	//pts := []
+	plotPoints := make([]plotter.XYs, 2)
+
 	for i, arr := range runTimesComp {
 		name := runNamesComp[i] + "out"
-		pts := pnpTimes(arr, name)
-		err = plotutil.AddScatters(p,
-			runNamesComp[i], pts)
-		check(err)
+		plotPoints[i] = pnpTimes(arr, name)
 	}
 
+	var args = make([]interface{}, 0, 2*len(plotPoints))
+
+	for i, v := range plotPoints {
+		args = append(args, runNamesComp[i], v)
+	}
+	err = plotutil.AddScatters(p, args...)
+	check(err)
 	// Save the plot to a PNG file.
 
 	outputFile, err := cfg.String("files.output")
@@ -52,11 +55,11 @@ func pnpTimes(runTimes []times, idStr string) plotter.XYs {
 		pts[i].Y = float64(row.runTime)
 	}
 	//printing
-	f, err := os.Create(idStr)
+	/*f, err := os.Create(idStr)
 	check(err)
 	for i := range pts {
 		fmt.Fprintf(f, "%v , %v \n", pts[i].X, pts[i].Y)
 	}
-	f.Close()
+	f.Close()*/
 	return pts
 }
