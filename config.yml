@@ -3,4 +3,4 @@ files:
   second: data/aedes_albopictus_protein.fa
   output: pointsB.png
 algorithm: needleman-wunsch
-profile: true
+profile: false
