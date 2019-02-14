@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"sort"
 
 	"gonum.org/v1/plot"
@@ -52,11 +51,11 @@ func pnpTimes(runTimes []times, idStr string) plotter.XYs {
 		pts[i].Y = float64(row.runTime)
 	}
 	//printing
-	f, err := os.Create(idStr)
+	/*f, err := os.Create(idStr)
 	check(err)
 	for i := range pts {
 		fmt.Fprintf(f, "%v , %v \n", pts[i].X, pts[i].Y)
 	}
-	f.Close()
+	f.Close()*/
 	return pts
 }
