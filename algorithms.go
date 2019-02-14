@@ -5,26 +5,41 @@ import (
 )
 
 func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimesArr) {
-	runNums := []int{10, 15, 20, 25, 30, 35, 40}
+	runNum := 100
 	runTimes = make(runTimesArr, 0)
 
 	if alg == "needleman-wunsch" {
-		for _, runNum := range runNums {
-			for x := 0; x < runNum; x++ {
-				for y := 0; y < runNum; y++ {
-					var timeRow times
-					startTime := time.Now()
+		for x := 0; x < runNum; x++ {
+			for y := 0; y < runNum; y++ {
+				var timeRow times
+				startTime := time.Now()
 
-					seqA := dataA[x].seq
-					seqB := dataB[y].seq
-					needlemanWunsch(seqA, seqB)
+				seqA := dataA[x].seq
+				seqB := dataB[y].seq
+				needlemanWunsch(seqA, seqB)
 
-					endTime := time.Now()
+				endTime := time.Now()
 
-					timeRow.strLen = (len(seqA) * len(seqB))
-					timeRow.runTime = int(endTime.Sub(startTime))
-					runTimes = append(runTimes, timeRow)
-				}
+				timeRow.strLen = (len(seqA) * len(seqB))
+				timeRow.runTime = int(endTime.Sub(startTime))
+				runTimes = append(runTimes, timeRow)
+			}
+		}
+	} else {
+		for x := 0; x < runNum; x++ {
+			for y := 0; y < runNum; y++ {
+				var timeRow times
+				startTime := time.Now()
+
+				seqA := dataA[x].seq
+				seqB := dataB[y].seq
+				paralellNeedlemanWunsch(seqA, seqB)
+
+				endTime := time.Now()
+
+				timeRow.strLen = (len(seqA) * len(seqB))
+				timeRow.runTime = int(endTime.Sub(startTime))
+				runTimes = append(runTimes, timeRow)
 			}
 		}
 	}
@@ -68,10 +83,27 @@ func needlemanWunsch(seqA, seqB string) {
 			resDel := numMat[i-1][j] + gap
 			resIns := numMat[i][j-1] + gap
 			numMat[i][j] = min(resMatch, resDel, resIns)
+			arrMat[i][j] = arrMin(resMatch, resDel, resIns)
 
 		}
 	}
+}
 
+func paralellNeedlemanWunsch(seqA, seqB string) {
+
+}
+
+func arrMin(a, b, c int) int {
+	diagonal := 1
+	up := 2
+	left := 3
+	if a < b && b < c {
+		return diagonal
+	} else if a > b && b > c {
+		return up
+	} else {
+		return left
+	}
 }
 
 func min(a, b, c int) int {

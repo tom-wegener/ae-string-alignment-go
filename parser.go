@@ -49,7 +49,7 @@ func parseFiles(path string) (data []record) {
 }
 
 func genEntr() (data []record) {
-	for i := 0; i < 51; i++ {
+	for i := 0; i < 101; i++ {
 		var rec record
 		rec.key = ">" + randomString(9)
 		rec.name = randomString(10)
