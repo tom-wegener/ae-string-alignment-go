@@ -53,7 +53,12 @@ func genEntr() (data []record) {
 		var rec record
 		rec.key = ">" + randomString(9)
 		rec.name = randomString(10)
-		strLen := i * 100
+		strLen := 300
+		if i > 50 {
+			strLen = i * 50
+		} else {
+			strLen = i * 100
+		}
 		rec.seq = randomString(strLen)
 
 		data = append(data, rec)
