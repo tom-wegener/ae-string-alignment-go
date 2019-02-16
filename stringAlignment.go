@@ -33,8 +33,8 @@ func main() {
 
 	//var runTimesComp []runTimesArr
 	runTimesComp := make([]runTimesArr, 2)
-	runTimesComp[0] = compareFiles(dataA, dataB, alg)
-	runTimesComp[1] = compareFiles(dataRA, dataRB, alg)
+	runTimesComp[0] = compareFiles(dataRA, dataRB, alg)
+	runTimesComp[1] = compareFiles(dataA, dataB, alg)
 
 	//var runNamesComp []string
 	runNamesComp := make([]string, 2)
