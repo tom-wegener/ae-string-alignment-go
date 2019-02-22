@@ -19,7 +19,7 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 
 				seqA := dataA[x].seq
 				seqB := dataB[y].seq
-				nwa(seqA, seqB)
+				score := nwa(seqA, seqB)
 
 				endTime := time.Now()
 
@@ -36,7 +36,7 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 
 				seqA := dataA[x].seq
 				seqB := dataB[y].seq
-				hnwa(seqA, seqB)
+				score := hnwa(seqA, seqB)
 
 				endTime := time.Now()
 
@@ -53,7 +53,7 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 
 				seqA := dataA[x].seq
 				seqB := dataB[y].seq
-				hnwa(seqA, seqB)
+				score := snwa(seqA, seqB)
 
 				endTime := time.Now()
 
@@ -71,7 +71,7 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 	return runTimes
 }
 
-func nwa(seqA, seqB string) {
+func nwa(seqA, seqB string) int {
 
 	a := len(seqA) + 1
 	b := len(seqB) + 1
@@ -110,10 +110,11 @@ func nwa(seqA, seqB string) {
 
 		}
 	}
+	return (numMat[a][b])
 }
 
 func hnwa(seqA, seqB string) {
-	fmt.Println("not working")
+	fmt.Println("not working at the moment, sorry")
 	/*p := 1
 	aux := seqA
 	minLen := 10
