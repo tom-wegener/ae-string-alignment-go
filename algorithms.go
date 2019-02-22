@@ -46,7 +46,7 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 		}
 	} else {
 		fmt.Println("The algorithm in the config-file does not exist")
-		fmt.Print("Please choose on of the following two: \n- nwa for Needleman-Wunsch-Algorithm \n- hnwa for Hirschberg-Needleman-Wunsch")
+		fmt.Print("Please choose on of the following two: \n- nwa for Needleman-Wunsch-Algorithm \n- hnwa for Hirschberg-Needleman-Wunsch \n")
 		os.Exit(1)
 	}
 
