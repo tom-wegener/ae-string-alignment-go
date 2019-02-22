@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -44,9 +45,26 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 				runTimes = append(runTimes, timeRow)
 			}
 		}
+	} else if alg == "snwa" {
+		for x := 0; x < runNum; x++ {
+			for y := 0; y < runNum; y++ {
+				var timeRow times
+				startTime := time.Now()
+
+				seqA := dataA[x].seq
+				seqB := dataB[y].seq
+				hnwa(seqA, seqB)
+
+				endTime := time.Now()
+
+				timeRow.strLen = (len(seqA) * len(seqB))
+				timeRow.runTime = int(endTime.Sub(startTime))
+				runTimes = append(runTimes, timeRow)
+			}
+		}
 	} else {
 		fmt.Println("The algorithm in the config-file does not exist")
-		fmt.Print("Please choose on of the following two: \n- nwa for Needleman-Wunsch-Algorithm \n- hnwa for Hirschberg-Needleman-Wunsch \n")
+		fmt.Print("Please choose on of the following two: \n- nwa for Needleman-Wunsch-Algorithm \n- snwa for a splitted nwa where the value is not exact \n-hnwa for Hirschberg-Needleman-Wunsch \n")
 		os.Exit(1)
 	}
 
@@ -95,6 +113,29 @@ func nwa(seqA, seqB string) {
 }
 
 func hnwa(seqA, seqB string) {
+	fmt.Println("not working")
+	/*p := 1
+	aux := seqA
+	minLen := 10
+	if (len(seqA) > minLen || len(seqB) > minLen) && p < P {
+
+	} else {
+		nwa(seqA, seqB)
+	}
+	*/
+}
+
+func snwa(seqA, seqB string) {
+
+}
+
+func splitString(a string) (string, string) {
+	strLen := int(len(a) / 2)
+	//make the string into a Sclice, bisect it and return it
+	strSli := strings.Split(a, "")
+	firHalf := strings.Join(strSli[:strLen], "")
+	secHalf := strings.Join(strSli[strLen:], "")
+	return firHalf, secHalf
 
 }
 
