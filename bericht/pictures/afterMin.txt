@@ -1,0 +1,68 @@
+File: ae-string-alignment-go
+Type: cpu
+Time: Feb 22, 2019 at 3:15pm (CET)
+Duration: 10.50mins, Total samples = 761.93s (120.93%)
+Showing nodes accounting for 715.08s, 93.85% of 761.93s total
+Dropped 319 nodes (cum <= 3.81s)
+      flat  flat%   sum%        cum   cum%
+   384.15s 50.42% 50.42%    611.84s 80.30%  main.nwa
+   130.21s 17.09% 67.51%    130.21s 17.09%  runtime.memclrNoHeapPointers
+    35.99s  4.72% 72.23%     39.09s  5.13%  runtime.findObject
+    31.69s  4.16% 76.39%     31.69s  4.16%  main.min (inline)
+    20.41s  2.68% 79.07%     55.94s  7.34%  runtime.sweepone
+    17.06s  2.24% 81.31%     81.75s 10.73%  runtime.scanobject
+    15.84s  2.08% 83.39%     22.85s  3.00%  runtime.greyobject
+    11.53s  1.51% 84.90%     11.53s  1.51%  runtime.procyield
+     7.63s  1.00% 85.90%     35.15s  4.61%  runtime.(*mspan).sweep
+     6.75s  0.89% 86.79%     10.12s  1.33%  runtime.(*mheap).freeSpanLocked
+     6.48s  0.85% 87.64%      6.48s  0.85%  runtime.(*gcBitsArena).tryAlloc (inline)
+     5.87s  0.77% 88.41%     15.03s  1.97%  runtime.lock
+     5.01s  0.66% 89.07%      5.05s  0.66%  runtime.unlock
+     4.24s  0.56% 89.62%      4.32s  0.57%  runtime.(*fixalloc).alloc
+     4.16s  0.55% 90.17%      4.46s  0.59%  runtime.(*gcSweepBuf).pop (inline)
+     4.10s  0.54% 90.71%      4.13s  0.54%  runtime.(*gcSweepBuf).push
+     2.90s  0.38% 91.09%     11.17s  1.47%  runtime.(*mheap).allocSpanLocked
+     1.99s  0.26% 91.35%     33.94s  4.45%  runtime.(*mheap).alloc_m
+     1.78s  0.23% 91.58%    195.15s 25.61%  runtime.mallocgc
+     1.68s  0.22% 91.80%     95.31s 12.51%  runtime.(*mcentral).cacheSpan
+     1.42s  0.19% 91.99%      8.32s  1.09%  runtime.schedule
+     1.37s  0.18% 92.17%    311.11s 40.83%  runtime.systemstack
+     1.10s  0.14% 92.31%    152.17s 19.97%  runtime.(*mheap).alloc
+     1.09s  0.14% 92.46%      6.08s   0.8%  runtime.heapBits.initSpan
+     1.05s  0.14% 92.59%     11.18s  1.47%  runtime.(*mcentral).freeSpan
+     1.05s  0.14% 92.73%      4.90s  0.64%  runtime.gentraceback
+     1.03s  0.14% 92.87%      4.32s  0.57%  runtime.(*mheap).reclaimList
+     1.03s  0.14% 93.00%      4.53s  0.59%  runtime.findrunnable
+     0.65s 0.085% 93.09%     88.44s 11.61%  runtime.(*mcentral).grow
+     0.61s  0.08% 93.17%     45.57s  5.98%  runtime.gosweepone
+     0.60s 0.079% 93.25%      7.39s  0.97%  runtime.newMarkBits
+     0.45s 0.059% 93.31%     16.19s  2.12%  runtime.(*mheap).reclaim
+     0.44s 0.058% 93.36%     45.93s  6.03%  runtime.bgsweep
+     0.40s 0.052% 93.42%     12.32s  1.62%  runtime.goschedImpl
+     0.38s  0.05% 93.47%     72.12s  9.47%  runtime.largeAlloc
+     0.37s 0.049% 93.51%     14.87s  1.95%  runtime.(*mheap).freeSpan.func1
+     0.36s 0.047% 93.56%     44.96s  5.90%  runtime.gosweepone.func1
+     0.32s 0.042% 93.60%    195.19s 25.62%  runtime.makeslice
+     0.31s 0.041% 93.64%     96.13s 12.62%  runtime.(*mcache).nextFree
+     0.30s 0.039% 93.68%     12.94s  1.70%  runtime.mcall
+     0.21s 0.028% 93.71%     72.33s  9.49%  runtime.mallocgc.func1
+     0.19s 0.025% 93.74%     95.50s 12.53%  runtime.(*mcache).refill
+     0.18s 0.024% 93.76%     15.05s  1.98%  runtime.(*mheap).freeSpan
+     0.13s 0.017% 93.78%     34.07s  4.47%  runtime.(*mheap).alloc.func1
+     0.12s 0.016% 93.79%     83.24s 10.92%  runtime.gcDrain
+     0.12s 0.016% 93.81%     12.15s  1.59%  runtime.gosched_m
+     0.06s 0.0079% 93.82%     95.56s 12.54%  runtime.(*mcache).nextFree.func1
+     0.05s 0.0066% 93.82%      5.45s  0.72%  runtime.mProf_Malloc
+     0.04s 0.0052% 93.83%      5.99s  0.79%  runtime.gcDrainN
+     0.03s 0.0039% 93.83%      4.67s  0.61%  runtime.callers
+     0.03s 0.0039% 93.84%      4.64s  0.61%  runtime.callers.func1
+     0.03s 0.0039% 93.84%     85.74s 11.25%  runtime.gcBgMarkWorker
+     0.03s 0.0039% 93.84%      5.59s  0.73%  runtime.profilealloc
+     0.02s 0.0026% 93.85%      6.02s  0.79%  runtime.gcAssistAlloc
+     0.01s 0.0013% 93.85%    611.86s 80.30%  main.compareFiles
+     0.01s 0.0013% 93.85%         6s  0.79%  runtime.gcAssistAlloc.func1
+     0.01s 0.0013% 93.85%         6s  0.79%  runtime.gcAssistAlloc1
+     0.01s 0.0013% 93.85%      7.18s  0.94%  runtime.markroot
+         0     0% 93.85%    612.71s 80.42%  main.main
+         0     0% 93.85%     83.19s 10.92%  runtime.gcBgMarkWorker.func2
+         0     0% 93.85%    612.71s 80.42%  runtime.main
