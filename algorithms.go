@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -8,7 +9,7 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 	runNum := 100
 	runTimes = make(runTimesArr, 0)
 
-	if alg == "needleman-wunsch" {
+	if alg == "nwa" {
 		for x := 0; x < runNum; x++ {
 			for y := 0; y < runNum; y++ {
 				var timeRow times
@@ -16,7 +17,24 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 
 				seqA := dataA[x].seq
 				seqB := dataB[y].seq
-				needlemanWunsch(seqA, seqB)
+				nwa(seqA, seqB)
+
+				endTime := time.Now()
+
+				timeRow.strLen = (len(seqA) * len(seqB))
+				timeRow.runTime = int(endTime.Sub(startTime))
+				runTimes = append(runTimes, timeRow)
+			}
+		}
+	} else if alg == "hnwa" {
+		for x := 0; x < runNum; x++ {
+			for y := 0; y < runNum; y++ {
+				var timeRow times
+				startTime := time.Now()
+
+				seqA := dataA[x].seq
+				seqB := dataB[y].seq
+				hnwa(seqA, seqB)
 
 				endTime := time.Now()
 
@@ -26,28 +44,14 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 			}
 		}
 	} else {
-		for x := 0; x < runNum; x++ {
-			for y := 0; y < runNum; y++ {
-				var timeRow times
-				startTime := time.Now()
-
-				seqA := dataA[x].seq
-				seqB := dataB[y].seq
-				paralellNeedlemanWunsch(seqA, seqB)
-
-				endTime := time.Now()
-
-				timeRow.strLen = (len(seqA) * len(seqB))
-				timeRow.runTime = int(endTime.Sub(startTime))
-				runTimes = append(runTimes, timeRow)
-			}
-		}
+		fmt.Println("The algorithm in the config-file does not exist")
+		fmt.Print("Please choose on of the following two: \n- nwa for Needleman-Wunsch-Algorithm \n- hnwa for Hirschberg-Needleman-Wunsch")
 	}
 
 	return runTimes
 }
 
-func needlemanWunsch(seqA, seqB string) {
+func nwa(seqA, seqB string) {
 
 	a := len(seqA) + 1
 	b := len(seqB) + 1
@@ -88,7 +92,7 @@ func needlemanWunsch(seqA, seqB string) {
 	}
 }
 
-func paralellNeedlemanWunsch(seqA, seqB string) {
+func hnwa(seqA, seqB string) {
 
 }
 
