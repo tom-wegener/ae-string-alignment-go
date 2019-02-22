@@ -82,8 +82,7 @@ func needlemanWunsch(seqA, seqB string) {
 			resMatch := numMat[i-1][j-1] + score
 			resDel := numMat[i-1][j] + gap
 			resIns := numMat[i][j-1] + gap
-			numMat[i][j] = min(resMatch, resDel, resIns)
-			arrMat[i][j] = arrMin(resMatch, resDel, resIns)
+			numMat[i][j], arrMat[i][j] = min(resMatch, resDel, resIns)
 
 		}
 	}
@@ -93,25 +92,15 @@ func paralellNeedlemanWunsch(seqA, seqB string) {
 
 }
 
-func arrMin(a, b, c int) int {
+func min(a, b, c int) (int, int) {
 	diagonal := 1
 	up := 2
 	left := 3
 	if a < b && b < c {
-		return diagonal
+		return a, diagonal
 	} else if a > b && b > c {
-		return up
+		return c, up
 	} else {
-		return left
-	}
-}
-
-func min(a, b, c int) int {
-	if a < b && b < c {
-		return a
-	} else if a > b && b > c {
-		return c
-	} else {
-		return b
+		return b, left
 	}
 }
