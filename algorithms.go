@@ -10,16 +10,23 @@ import (
 func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimesArr) {
 	runNum := 100
 	runTimes = make(runTimesArr, 0)
+	scoresArr := make(scoresArr, 0)
 
 	if alg == "nwa" {
 		for x := 0; x < runNum; x++ {
 			for y := 0; y < runNum; y++ {
 				var timeRow times
+				var scoreRow scores
+
 				startTime := time.Now()
 
 				seqA := dataA[x].seq
 				seqB := dataB[y].seq
-				score := nwa(seqA, seqB)
+				scoreRow.score = nwa(seqA, seqB)
+				keyA := dataA[x].key
+				keyB := dataB[y].key
+				scoreRow.key = keyA + "," + keyB
+				scoresArr = append(scoresArr, scoreRow)
 
 				endTime := time.Now()
 
@@ -32,11 +39,17 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 		for x := 0; x < runNum; x++ {
 			for y := 0; y < runNum; y++ {
 				var timeRow times
+				var scoreRow scores
 				startTime := time.Now()
 
 				seqA := dataA[x].seq
 				seqB := dataB[y].seq
-				score := hnwa(seqA, seqB)
+
+				scoreRow.score = hnwa(seqA, seqB)
+				keyA := dataA[x].key
+				keyB := dataB[y].key
+				scoreRow.key = keyA + "," + keyB
+				scoresArr = append(scoresArr, scoreRow)
 
 				endTime := time.Now()
 
@@ -49,11 +62,17 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 		for x := 0; x < runNum; x++ {
 			for y := 0; y < runNum; y++ {
 				var timeRow times
+				var scoreRow scores
 				startTime := time.Now()
 
 				seqA := dataA[x].seq
 				seqB := dataB[y].seq
-				score := snwa(seqA, seqB)
+
+				scoreRow.score = snwa(seqA, seqB)
+				keyA := dataA[x].key
+				keyB := dataB[y].key
+				scoreRow.key = keyA + "," + keyB
+				scoresArr = append(scoresArr, scoreRow)
 
 				endTime := time.Now()
 
@@ -63,7 +82,7 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 			}
 		}
 	} else {
-		fmt.Println("The algorithm in the config-file does not exist")
+		fmt.Println("The algorithm you configured in the config-file does not exist")
 		fmt.Print("Please choose on of the following two: \n- nwa for Needleman-Wunsch-Algorithm \n- snwa for a splitted nwa where the value is not exact \n-hnwa for Hirschberg-Needleman-Wunsch \n")
 		os.Exit(1)
 	}
@@ -110,10 +129,10 @@ func nwa(seqA, seqB string) int {
 
 		}
 	}
-	return (numMat[a][b])
+	return numMat[a-1][b-1]
 }
 
-func hnwa(seqA, seqB string) {
+func hnwa(seqA, seqB string) int {
 	fmt.Println("not working at the moment, sorry")
 	/*p := 1
 	aux := seqA
@@ -124,18 +143,56 @@ func hnwa(seqA, seqB string) {
 		nwa(seqA, seqB)
 	}
 	*/
+	return 1
 }
 
-func snwa(seqA, seqB string) {
+func snwa(seqA, seqB string) int {
+	//calculate a point where a letter is the same in both strings nearest to the middle
+	splitterA, splitterB := findSame(seqA, seqB)
 
+	var score int
+	if splitterA == 0 || splitterB == 0 {
+		score = nwa(seqA, seqB)
+	} else {
+		seqAA, seqAB := bisectString(seqA, splitterA)
+		seqBA, seqBB := bisectString(seqB, splitterB)
+		scoreA := nwa(seqAA, seqBA)
+		scoreB := nwa(seqAB, seqBB)
+		score = scoreA + scoreB
+	}
+
+	return score
 }
 
-func splitString(a string) (string, string) {
-	strLen := int(len(a) / 2)
+func findSame(seqA, seqB string) (int, int) {
+	for i := 0; i < len(seqA); i++ {
+		for j := 0; j < len(seqB) && j < (i+5); j++ {
+			k := snwaHelper(i, len(seqA))
+			l := snwaHelper(j, len(seqB))
+			if seqA[k] == seqB[l] {
+				return k, l
+			}
+		}
+	}
+	return 0, 0
+}
+
+func snwaHelper(a, b int) int {
+	c := a
+	if a%2 == 0 {
+		c = a / 2
+	} else {
+		c = int(-(a/2 + 1))
+	}
+	d := b/2 + c
+	return d
+}
+
+func bisectString(a string, strLen int) (string, string) {
 	//make the string into a Sclice, bisect it and return it
 	strSli := strings.Split(a, "")
-	firHalf := strings.Join(strSli[:strLen], "")
-	secHalf := strings.Join(strSli[strLen:], "")
+	firHalf := strings.Join(strSli[:(strLen+1)], "")
+	secHalf := strings.Join(strSli[(strLen-1):], "")
 	return firHalf, secHalf
 
 }
