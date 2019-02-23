@@ -192,8 +192,8 @@ func snwaHelper(a, b int) int {
 func bisectString(a string, strLen int) (string, string) {
 	//make the string into a Sclice, bisect it and return it
 	strSli := strings.Split(a, "")
-	firHalf := strings.Join(strSli[:(strLen+1)], "")
-	secHalf := strings.Join(strSli[(strLen-1):], "")
+	firHalf := strings.Join(strSli[:strLen], "")
+	secHalf := strings.Join(strSli[strLen:], "")
 	return firHalf, secHalf
 
 }
