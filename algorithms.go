@@ -126,7 +126,7 @@ func nwa(seqA, seqB string) int {
 			resMatch := numMat[i-1][j-1] + score
 			resDel := numMat[i-1][j] + gap
 			resIns := numMat[i][j-1] + gap
-			numMat[i][j], arrMat[i][j] = min(resMatch, resDel, resIns)
+			numMat[i][j], arrMat[i][j] = max(resMatch, resDel, resIns)
 
 		}
 	}
@@ -199,13 +199,13 @@ func bisectString(a string, strLen int) (string, string) {
 
 }
 
-func min(a, b, c int) (int, int) {
+func max(a, b, c int) (int, int) {
 	diagonal := 1
 	up := 2
 	left := 3
-	if a < b && b < c {
+	if c < b && b < a {
 		return a, diagonal
-	} else if a > b && b > c {
+	} else if a < b && b < c {
 		return c, up
 	} else {
 		return b, left
