@@ -10,7 +10,7 @@ import (
 func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimesArr) {
 	runNum := 100
 	runTimes = make(runTimesArr, 0)
-	scoresArr := make(scoresArr, 0)
+	scoresColl := make(scoresArr, 0)
 
 	if alg == "nwa" {
 		for x := 0; x < runNum; x++ {
@@ -26,7 +26,7 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 				keyA := dataA[x].key
 				keyB := dataB[y].key
 				scoreRow.key = keyA + "," + keyB
-				scoresArr = append(scoresArr, scoreRow)
+				scoresColl = append(scoresColl, scoreRow)
 
 				endTime := time.Now()
 
@@ -49,7 +49,7 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 				keyA := dataA[x].key
 				keyB := dataB[y].key
 				scoreRow.key = keyA + "," + keyB
-				scoresArr = append(scoresArr, scoreRow)
+				scoresColl = append(scoresColl, scoreRow)
 
 				endTime := time.Now()
 
@@ -69,10 +69,10 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 				seqB := dataB[y].seq
 
 				scoreRow.score = snwa(seqA, seqB)
-				keyA := dataA[x].key
-				keyB := dataB[y].key
+				keyA := dataA[x].name
+				keyB := dataB[y].name
 				scoreRow.key = keyA + "," + keyB
-				scoresArr = append(scoresArr, scoreRow)
+				scoresColl = append(scoresColl, scoreRow)
 
 				endTime := time.Now()
 
@@ -87,6 +87,7 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 		os.Exit(1)
 	}
 
+	saveScore(scoresColl)
 	return runTimes
 }
 

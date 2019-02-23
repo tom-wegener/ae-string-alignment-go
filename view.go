@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"sort"
 
 	"gonum.org/v1/plot"
@@ -36,7 +37,7 @@ func plotIt(runTimesComp []runTimesArr, runNamesComp []string) {
 	check(err)
 	// Save the plot to a PNG file.
 
-	outputFile, err := cfg.String("files.output")
+	outputFile, err := cfg.String("files.scatter")
 	check(err)
 	err = p.Save(10*vg.Inch, 10*vg.Inch, outputFile)
 	check(err)
@@ -54,12 +55,16 @@ func pnpTimes(runTimes []times, idStr string) plotter.XYs {
 		pts[i].X = float64(row.strLen)
 		pts[i].Y = float64(row.runTime)
 	}
-	//printing
-	/*f, err := os.Create(idStr)
-	check(err)
-	for i := range pts {
-		fmt.Fprintf(f, "%v , %v \n", pts[i].X, pts[i].Y)
-	}
-	f.Close()*/
 	return pts
+}
+
+func saveScore(scoresColl scoresArr) {
+	outputFile, err := cfg.String("files.scores")
+	f, err := os.Create(outputFile)
+	check(err)
+	for i := range scoresColl {
+		fmt.Fprintf(f, "%v , %v \n", scoresColl[i].key, scoresColl[i].score)
+	}
+	f.Close()
+
 }

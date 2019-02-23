@@ -27,6 +27,12 @@ func parseFiles(path string) (data []record) {
 		if sLine[:1] == ">" {
 			splittedLine := strings.Split(sLine, "|")
 			rec.key = splittedLine[0]
+			for _, part := range splittedLine {
+				if part[:2] == "XP" {
+					rec.name = part
+					break
+				}
+			}
 			rec.name = splittedLine[1]
 			rec.seq = ""
 
