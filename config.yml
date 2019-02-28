@@ -1,6 +1,9 @@
 files:
   first: data/aedes_aegypti_protein.fa
   second: data/aedes_albopictus_protein.fa
-  output: pointsB.png
+  scatter: points.png
+  scores: score
+  times: times
 algorithm: nwa
 profile: true
+test: true
