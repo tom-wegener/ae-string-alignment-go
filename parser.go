@@ -47,10 +47,6 @@ func parseFiles(path string) (data []record) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	//fmt.Println("no error occured in Parsing")
-
-	//fmt.Println(data[1].seq)
 	return data
 }
 
