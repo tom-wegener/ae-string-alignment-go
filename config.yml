@@ -6,4 +6,4 @@ files:
   times: times
 algorithm: nwa
 profile: true
-test: true
+test: false
