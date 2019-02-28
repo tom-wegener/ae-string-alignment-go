@@ -13,7 +13,6 @@ import (
 
 func plotIt(runTimesComp []runTimesArr, runNamesComp []string) {
 
-	fmt.Println("starting to plot")
 	p, err := plot.New()
 	check(err)
 
@@ -24,7 +23,7 @@ func plotIt(runTimesComp []runTimesArr, runNamesComp []string) {
 	plotPoints := make([]plotter.XYs, 2)
 
 	for i, arr := range runTimesComp {
-		name := runNamesComp[i] + "out"
+		name := runNamesComp[i]
 		plotPoints[i] = pnpTimes(arr, name)
 		saveTimes(arr, name)
 	}

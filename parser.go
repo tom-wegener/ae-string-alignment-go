@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"log"
 	"math/rand"
 	"os"
 	"strings"
@@ -14,11 +13,12 @@ func parseFiles(path string) (data []record) {
 
 	faFile, err := os.Open(path) //open file
 	check(err)
-	defer func() {
+
+	/*defer func() {
 		if err = faFile.Close(); err != nil {
 			log.Fatal(err)
 		}
-	}()
+	}()*/
 
 	scanner := bufio.NewScanner(faFile)
 	for scanner.Scan() {
@@ -44,9 +44,9 @@ func parseFiles(path string) (data []record) {
 	}
 
 	err = scanner.Err()
-	if err != nil {
-		log.Fatal(err)
-	}
+	check(err)
+	faFile.Close()
+	check(err)
 	return data
 }
 
