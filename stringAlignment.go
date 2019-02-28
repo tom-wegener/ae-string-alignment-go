@@ -17,6 +17,42 @@ func main() {
 		defer profile.Start().Stop()
 	}
 
+	test, err := cfg.Bool("test")
+	check(err)
+	if test == true {
+		testAlgorithms()
+	} else {
+		profileAlgorithms()
+	}
+
+}
+
+func testAlgorithms() {
+	firstFile, err := cfg.String("files.first")
+	check(err)
+	secFile, err := cfg.String("files.second")
+	check(err)
+
+	runTimesComp := make([]runTimesArr, 2)
+
+	dataA := parseFiles(firstFile)
+	dataB := parseFiles(secFile)
+
+	alg := "snwa"
+	runTimesComp[0] = compareFilesTest(dataA, dataB, alg)
+
+	alg = "nwa"
+	runTimesComp[1] = compareFilesTest(dataA, dataB, alg)
+
+	runNamesComp := make([]string, 2)
+	runNamesComp[0] = "snwa"
+	runNamesComp[1] = "nwa"
+
+	saveTimes(runTimesComp[0], runNamesComp[0])
+	saveTimes(runTimesComp[1], runNamesComp[1])
+}
+
+func profileAlgorithms() {
 	firstFile, err := cfg.String("files.first")
 	check(err)
 	secFile, err := cfg.String("files.second")
@@ -38,7 +74,7 @@ func main() {
 
 	//var runNamesComp []string
 	runNamesComp := make([]string, 2)
-	runNamesComp[0] = firstFile + secFile
+	runNamesComp[0] = "fasta"
 	runNamesComp[1] = "Random"
 
 	plotIt(runTimesComp, runNamesComp)
