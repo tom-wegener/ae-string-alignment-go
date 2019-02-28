@@ -23,8 +23,8 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 				seqA := dataA[x].seq
 				seqB := dataB[y].seq
 				scoreRow.score = nwa(seqA, seqB)
-				keyA := dataA[x].key
-				keyB := dataB[y].key
+				keyA := dataA[x].name
+				keyB := dataB[y].name
 				scoreRow.key = keyA + "," + keyB
 				scoresColl = append(scoresColl, scoreRow)
 
@@ -46,8 +46,8 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 				seqB := dataB[y].seq
 
 				scoreRow.score = hnwa(seqA, seqB)
-				keyA := dataA[x].key
-				keyB := dataB[y].key
+				keyA := dataA[x].name
+				keyB := dataB[y].name
 				scoreRow.key = keyA + "," + keyB
 				scoresColl = append(scoresColl, scoreRow)
 
@@ -73,6 +73,57 @@ func compareFiles(dataA []record, dataB []record, alg string) (runTimes runTimes
 				keyB := dataB[y].name
 				scoreRow.key = keyA + "," + keyB
 				scoresColl = append(scoresColl, scoreRow)
+
+				endTime := time.Now()
+
+				timeRow.strLen = (len(seqA) * len(seqB))
+				timeRow.runTime = int(endTime.Sub(startTime))
+				runTimes = append(runTimes, timeRow)
+			}
+		}
+	} else {
+		fmt.Println("The algorithm you configured in the config-file does not exist")
+		fmt.Print("Please choose on of the following three: \n- nwa for Needleman-Wunsch-Algorithm \n- snwa for a splitted nwa where the value is not exact \n-hnwa for Hirschberg-Needleman-Wunsch (not done yet)\n")
+		os.Exit(1)
+	}
+
+	saveScore(scoresColl)
+	return runTimes
+}
+
+func compareFilesTest(dataA []record, dataB []record, alg string) (runTimes runTimesArr) {
+	runNum := 10
+	runTimes = make(runTimesArr, 0)
+	scoresColl := make(scoresArr, 0)
+
+	if alg == "nwa" {
+		for x := 0; x < runNum; x++ {
+			for y := 0; y < runNum; y++ {
+				var timeRow times
+
+				startTime := time.Now()
+
+				seqA := dataA[1].seq
+				seqB := dataB[1].seq
+				nwa(seqA, seqB)
+
+				endTime := time.Now()
+
+				timeRow.strLen = (len(seqA) * len(seqB))
+				timeRow.runTime = int(endTime.Sub(startTime))
+				runTimes = append(runTimes, timeRow)
+			}
+		}
+	} else if alg == "snwa" {
+		for x := 0; x < runNum; x++ {
+			for y := 0; y < runNum; y++ {
+				var timeRow times
+				startTime := time.Now()
+
+				seqA := dataA[1].seq
+				seqB := dataB[1].seq
+
+				snwa(seqA, seqB)
 
 				endTime := time.Now()
 
