@@ -8,17 +8,10 @@ import (
 )
 
 func parseFiles(path string) (data []record) {
-	//data := make([]record, 0)
 	var rec record
 
 	faFile, err := os.Open(path) //open file
 	check(err)
-
-	/*defer func() {
-		if err = faFile.Close(); err != nil {
-			log.Fatal(err)
-		}
-	}()*/
 
 	scanner := bufio.NewScanner(faFile)
 	for scanner.Scan() {
@@ -39,7 +32,6 @@ func parseFiles(path string) (data []record) {
 			data = append(data, rec)
 		} else {
 			data[len(data)-1].seq = data[len(data)-1].seq + sLine
-			//rec.seq = rec.seq + sLine
 		}
 	}
 
@@ -65,7 +57,6 @@ func genEntr() (data []record) {
 
 		data = append(data, rec)
 	}
-	//fmt.Print(data)
 	return data
 }
 

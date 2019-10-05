@@ -67,12 +67,10 @@ func profileAlgorithms() {
 	dataRA := genEntr()
 	dataRB := genEntr()
 
-	//var runTimesComp []runTimesArr
 	runTimesComp := make([]runTimesArr, 2)
 	runTimesComp[0] = compareFiles(dataRA, dataRB, alg)
 	runTimesComp[1] = compareFiles(dataA, dataB, alg)
 
-	//var runNamesComp []string
 	runNamesComp := make([]string, 2)
 	runNamesComp[0] = "fasta"
 	runNamesComp[1] = "Random"

@@ -133,9 +133,8 @@ func compareFilesTest(dataA []record, dataB []record, alg string) (runTimes runT
 			}
 		}
 	} else {
-		fmt.Println("The algorithm you configured in the config-file does not exist")
-		fmt.Print("Please choose on of the following three: \n- nwa for Needleman-Wunsch-Algorithm \n- snwa for a splitted nwa where the value is not exact \n-hnwa for Hirschberg-Needleman-Wunsch (not done yet)\n")
-		os.Exit(1)
+		err := fmt.Errorf("somehow an error occured here, sorry, that shouldn't happen")
+		check(err)
 	}
 
 	saveScore(scoresColl)
@@ -186,15 +185,6 @@ func nwa(seqA, seqB string) int {
 
 func hnwa(seqA, seqB string) int {
 	fmt.Println("not working at the moment, sorry")
-	/*p := 1
-	aux := seqA
-	minLen := 10
-	if (len(seqA) > minLen || len(seqB) > minLen) && p < P {
-
-	} else {
-		nwa(seqA, seqB)
-	}
-	*/
 	os.Exit(1)
 	return 1
 }
